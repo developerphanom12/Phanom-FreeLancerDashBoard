@@ -11,7 +11,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F5F7F9]">
       <Navbar toggleSidebar={toggleSidebar} />
       
       <div className="flex">

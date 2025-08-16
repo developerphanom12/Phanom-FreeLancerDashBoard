@@ -49,7 +49,7 @@ const Navbar = ({ toggleSidebar }) => {
           </button>
 
           {/* Hire Indian Talent button */}
-          <button className="bg-gradient-to-r from-[#459CE1] to-[#D11AE7] text-white px-4 py-1 rounded-xl hover:bg-purple-700 transition-colors hidden sm:block">
+          <button className="bg-gradient-to-r from-[#459CE1] to-[#D11AE7] text-white px-4 py-1 rounded-lg hover:bg-purple-700 transition-colors hidden sm:block">
             Hire Indian Talent
           </button>
 

@@ -1,27 +1,27 @@
 import React from 'react';
-import { FaAngleRight, FaMapMarkerAlt, FaLanguage } from "react-icons/fa";
+import { FaAngleRight, FaMapMarkerAlt, FaLanguage, FaLink } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 // import { FaGlobe } from "react-icons/fa6";
 // import profile from '../../assets/profile.png'; 
 
 const ProfileMain = () => {
+    const navigate = useNavigate();
     return (
-        <div className='relative z-10 font-sans'>
-            {/* Gradient Header */}
-            {/* <div className='bg-gradient-to-r from-[#469AE0] via-[#9A4DE4] to-[#D01AE5] py-4 px-5 md:px-16'>
-                <h1 className='text-white font-bold text-2xl md:text-3xl'>Profile</h1>
-            </div> */}
-
-            <div className='w-[90vw] mx-auto'>
-
-            {/* Breadcrumbs */}
-            {/* <div className='w-full  py-4 flex flex-wrap gap-2 items-center text-gray-600 text-sm md:text-base'>
-                <span className='hover:underline cursor-pointer'>Home</span>
-                <FaAngleRight />
-                <span className='hover:underline cursor-pointer'>Service</span>
-                <FaAngleRight />
-                <span className='text-purple-600 font-medium'>Development</span>
-            </div> */}
-
+        <div className='relative z-10 space-y-6 bg-[#F5F7F9] '>
+             {/* Header */}
+      <div className='flex justify-between'>
+        <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
+        <div className='flex gap-2'>
+            <div onClick={() => navigate('/profile/edit')} className='border border-gray-400 px-3 py-1 rounded-lg hover:bg-gray-200 cursor-pointer '>
+                Edit Profile
+            </div>
+            <div className='border border-gray-400 px-3 py-1 rounded-lg hover:bg-gray-200 cursor-pointer '>
+               Share
+            </div>
+        </div>
+      </div>
+           
+            <div className='mx-auto'>
            
             {/* Profile Info Section */}
             <div className='w-full mt-2 flex flex-col md:flex-row gap-6 items-start'>
@@ -33,7 +33,7 @@ const ProfileMain = () => {
                         className='w-full h-full object-cover rounded-full border-4 border-white shadow-md'
                     />
                     {/* Online Indicator */}
-                    <div className='absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full'></div>
+                    {/* <div className='absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full'></div> */}
                 </div>
 
                 {/* Profile Details */}
@@ -47,24 +47,21 @@ const ProfileMain = () => {
                     <p className='text-sm text-purple-500 mt-1'>Ui Ux Designer | React Js</p>
 
                     {/* Location and Language */}
-                    <div className='mt-2 flex flex-col flex-wrap gap-4 text-sm text-gray-600'>
+                    <div className='mt-2 flex flex-col flex-wrap gap-1 text-sm text-gray-600'>
                         <div className='flex items-center gap-1'>
                             <FaMapMarkerAlt /> Mohali, Punjab, India
                         </div>
                         <div className='flex items-center gap-1'>
                             <FaLanguage /> English, Hindi
                         </div>
+                        <div className='flex items-center gap-1'>
+                            <FaLink /> www.phanomprofessionals.com/ranjanisingh
+                        </div>
                     </div>
 
                     {/* Buttons */}
                 </div>
-                    {/* <div className='mt-4 flex flex-wrap gap-3'>
-                        <button className='text-black px-4 py-2 border border-gray-300 font-medium shadow-lg rounded-lg hover:bg-gray-100'>Message Me</button>
-                        <button className='text-black px-4 py-2 border border-gray-300 font-medium shadow-lg rounded-lg hover:bg-gray-100'>Portfolio</button>
-                        <button className='text-black px-4 py-2 border border-gray-300 font-medium shadow-lg rounded-lg hover:bg-gray-100'>My Gigs</button>
-                        <button className='text-black px-4 py-2 border border-gray-300 font-medium shadow-lg rounded-lg hover:bg-gray-100'>Edit Profile</button>
-                        <button className='text-black px-4 py-2 border border-gray-300 font-medium shadow-lg rounded-lg hover:bg-gray-100'>Share</button>
-                    </div> */}
+                
             </div>
 
             {/* About Me Section */}
@@ -76,7 +73,7 @@ const ProfileMain = () => {
             </div>
 
             {/* Skills Section */}
-            <div className='w-full  mt-6 mb-10'>
+            <div className='w-full  mt-6 '>
                 <h3 className='text-2xl font-semibold mb-4'>Skills</h3>
                 <div className='flex flex-wrap gap-3'>
                     {["Wireframing", "Prototyping", "UX Design", "Responsive", "Components", "UI/UX", "Routing", "APIs", "State", "+14"].map((skill, index) => (

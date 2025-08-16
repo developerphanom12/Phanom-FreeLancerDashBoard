@@ -58,7 +58,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 {/* Menu items */}
                 {section.items.map((item, itemIndex) => {
                   const IconComponent = item.icon;
-                  const isActive = location.pathname === item.path;
+                  const isActive = item.path === "/"
+                                    ? location.pathname === "/"   // Home ke liye exact match
+                                    : location.pathname.startsWith(item.path);
+
                   
                   return (
                     <Link
