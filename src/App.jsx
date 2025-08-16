@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './Layout/Layout'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import Profile from './Pages/Profile/Profile'
+import Supports from './Pages/Support/Supports'
+import PaymentSettings from './Pages/PaymentSettings/PaymentSettings'
 import EditProfile from './Pages/Profile/EditProfile'
 import Portfolio from './Pages/Portfolio/Portfolio'
 
@@ -15,8 +17,10 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
+           <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/portfolio" element={<Portfolio/>} />
+          <Route path="/support" element={<Supports />} />
+          <Route path="/favorites" element={<PaymentSettings />} />
           {/* <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/gigs" element={<Gigs />} />
