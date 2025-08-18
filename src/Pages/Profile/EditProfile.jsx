@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { FaCamera } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
   const [active, setActive] = useState(true);
   const [skills, setSkills] = useState(["HTML"]);
+  const navigate = useNavigate();
 
   const handleAddSkill = (e) => {
     if (e.key === "Enter" && e.target.value.trim() !== "") {
@@ -19,10 +22,10 @@ const EditProfile = () => {
   return (
     <div className="bg-[#F5F7F9] min-h-screen p-6">
       {/* Card */}
-      <div className=" max-w-5xl mx-auto">
+      <div className=" mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Edit Profile</h2>
+          <h2 className="flex gap-3 text-xl font-semibold justify-center"><FaArrowLeft onClick={() => navigate('/profile')} className="text-lg mt-1 cursor-pointer"/>Edit Profile</h2>
           <button className="px-4 py-2 bg-gradient-to-r from-[#429CE1] via-[#9158E4] to-[#CA1DE5] text-white rounded-lg text-sm font-medium shadow-md hover:opacity-90">
             Save Changes
           </button>

@@ -4,71 +4,13 @@ import { RiContactsLine } from "react-icons/ri";
 import { TbCurrentLocation } from "react-icons/tb";
 import { IoIosTime } from "react-icons/io";
 import { CiLink } from "react-icons/ci";
-
+import { useNavigate } from 'react-router-dom';
+import MyGigs from './MyGigs';
+import Projects from './Projects';
 
 const Banner = () => {
     const [bannerImage, setBannerImage] = useState(null);
-
-    // Projects data
-    const projects = [
-        {
-            id: 1,
-            title: 'UI/UX design creating intuitive, user-first designs and Figma layouts for web and mobile applications.',
-            image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400',
-            likes: 1.1,
-            views: 473,
-            orders: 4.6,
-            price: 'From ₹ 4,999 /-'
-        },
-        {
-            id: 2,
-            title: 'UI/UX design creating intuitive, user-first designs and Figma layouts for web and mobile applications.',
-            image: 'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400',
-            likes: 1.1,
-            views: 473,
-            orders: 4.6,
-            price: 'From ₹ 4,999 /-'
-        },
-        {
-            id: 3,
-            title: 'UI/UX design creating intuitive, user-first designs and Figma layouts for web and mobile applications.',
-            image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400',
-            likes: 1.1,
-            views: 473,
-            orders: 4.6,
-            price: 'From ₹ 4,999 /-'
-        }
-    ];
-
-    const myGigs = [
-        {
-            id: 1,
-            title: 'UI/UX design creating intuitive, user-first designs and Figma layouts for web and mobile applications.',
-            image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400',
-            likes: 1.1,
-            views: 473,
-            orders: 4.6,
-            price: 'From ₹ 4,999 /-'
-        },
-        {
-            id: 2,
-            title: 'UI/UX design creating intuitive, user-first designs and Figma layouts for web and mobile applications.',
-            image: 'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400',
-            likes: 1.1,
-            views: 473,
-            orders: 4.6,
-            price: 'From ₹ 4,999 /-'
-        },
-        {
-            id: 3,
-            title: 'UI/UX design creating intuitive, user-first designs and Figma layouts for web and mobile applications.',
-            image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400',
-            likes: 1.1,
-            views: 473,
-            orders: 4.6,
-            price: 'From ₹ 4,999 /-'
-        }
-    ];
+    const navigate = useNavigate();
 
     const handleBannerUpload = (event) => {
         const file = event.target.files[0];
@@ -83,7 +25,16 @@ const Banner = () => {
 
     return (
         <div className='min-h-screen p-6'>
-            {/* Gradient Header */}
+           {/* Header */}
+      <div className='flex justify-between mb-3'>
+        <h1 className="text-2xl font-bold text-gray-900">Portfolio</h1>
+        <div className='flex gap-2'>
+            <div onClick={() => navigate('/profile/edit')} className='border-[2px] border-gray-400 px-3 py-1 rounded-lg hover:bg-gray-200 cursor-pointer '>
+               Share
+            </div>
+        </div>
+      </div>
+
 
             {/* Main Content */}
             <div className=' pb-8'>
@@ -116,7 +67,7 @@ const Banner = () => {
                                     <img
                                         src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZhY2V8ZW58MHx8MHx8fDA%3D"
                                         alt="Profile"
-                                        className='w-32 h-32 rounded-full object-cover mb-4 -mt-24 border-4 border-white shadow-lg z-20'
+                                        className='w-32 h-32 rounded-full object-cover mb-4 -mt-20 border-4 border-white shadow-lg z-20'
                                     />
 
                                     <div className='text-center md:text-left mb-4'>
@@ -137,119 +88,21 @@ const Banner = () => {
                                     </div>
 
                                     <div className='w-full space-y-2 mb-6'>
-                                        <button className='w-full bg-purple-600 text-white py-2 px-4 hover:bg-purple-700 transition-colors rounded-full flex justify-center items-center gap-3'>
+                                        <button onClick={() => navigate('/profile/edit')} className='w-full bg-purple-600 text-white py-2 px-4 hover:bg-purple-700 transition-colors rounded-full flex justify-center items-center gap-3'>
                                             <FaEdit />Edit Profile Info
                                         </button>
-                                        <button className='w-full bg-purple-600 text-white py-2 px-4 hover:bg-purple-700 transition-colors rounded-full flex justify-center items-center gap-3'>
+                                        <button onClick={() => navigate('/portfolio/upload-your-work')} className='w-full bg-purple-600 text-white py-2 px-4 hover:bg-purple-700 transition-colors rounded-full flex justify-center items-center gap-3'>
                                             <FaUpload /> Upload Your Work
                                         </button>
                                     </div>
 
                                     {/* My Gigs Section */}
-                                    <div className='mt-8'>
-                                        <h2 className='text-2xl font-bold mb-6'>My Gigs</h2>
-                                        <div className='grid grid-cols-1  gap-6'>
-                                            {myGigs.map((gig) => (
-                                                <div key={gig.id} className='overflow-hidden transition-shadow'>
-                                                    <div className='relative'>
-                                                        <img
-                                                            src={gig.image}
-                                                            alt={gig.title}
-                                                            className='w-full h-48 object-cover  rounded-lg '
-                                                        />
-                                                        {/* <button className='absolute top-3 right-3 text-white hover:text-red-500 transition-colors'>
-                                                            <FaHeart />
-                                                        </button> */}
-                                                    </div>
-
-                                                    <div className='py-4'>
-                                                        <p className='text-sm text-gray-700 mb-3 line-clamp-3'>{gig.title}</p>
-
-                                                        {/* <div className='flex items-center justify-between text-xs text-gray-600 mb-3'>
-                                                            <div className='flex items-center gap-3'>
-                                                                <span className='flex items-center gap-1'>
-                                                                    <FaHeart className='text-red-500' />
-                                                                    {gig.likes}k
-                                                                </span>
-                                                                <span className='flex items-center gap-1'>
-                                                                    <FaEye />
-                                                                    {gig.views}
-                                                                </span>
-                                                                <span>⭐ {gig.orders}</span>
-                                                            </div>
-                                                        </div> */}
-
-                                                        <p className='text-sm font-medium text-gray-800'>{gig.price}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
+                                    <MyGigs />
                                 </div>
                             </div>
 
                             {/* Right - About Section */}
-                            <div className='md:w-2/3'>
-                                <h2 className='text-2xl font-bold mb-6 text-purple-600 border-b-2 border-purple-600 w-fit px-6 p-2'>Work</h2>
-                                <div className='bg-gray-100 rounded-lg p-6 h-48 flex items-center justify-center text-gray-500'>
-                                    About section content goes here
-                                </div>
-                                <div className='mt-8'>
-                                    <h2 className='text-2xl font-bold mb-6'>Projects</h2>
-                                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                                        {projects.map((project) => (
-                                            <div key={project.id} className=' overflow-hidden  rounded-lg'>
-                                                <div className='relative'>
-                                                    <img
-                                                        src={project.image}
-                                                        alt={project.title}
-                                                        className='w-full h-48 object-cover rounded-lg'
-                                                    />
-                                                    {/* <button className='absolute top-3 right-3 text-white hover:text-red-500 transition-colors'>
-                    <FaHeart />
-                  </button> */}
-                                                </div>
-
-                                                <div className='p-4'>
-
-                                                    <div className='flex items-center justify-end text-xs text-gray-600 mb-3'>
-                                                        <div className='flex items-center gap-3'>
-                                                            <span className='flex items-center gap-1'>
-                                                                <FaThumbsUp className='text-black' />
-                                                                {project.likes}k
-                                                            </span>
-                                                            <span className='flex items-center gap-1 text-black'>
-                                                                <FaEye />
-                                                                {project.views}
-                                                            </span>
-                                                            <span className='flex gap-2 justify-center'><FaStar className='text-black ' /> {project.orders}{"(1k+)"}</span>
-                                                        </div>
-                                                    </div>
-                                                    <p className='text-sm text-gray-700 mb-3 line-clamp-3'>{project.title}</p>
-
-                                                    <p className='text-sm font-medium text-gray-800'>{project.price}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                        {/* <div  className='border-dashed border-black overflow-hidden hover:shadow-lg rounded-lg'>
-                                                
-                                                <div className='w-12 h-12 flex bg-violet-400 justify-center items-center rounded-full'>
-                                                         < FaPlusCircle className='text-white'/>
-                                                </div>
-                                        </div> */}
-                                        <div className='h-72 border-dashed border-2 border-[#D3BDF3] p-4 overflow-hidden hover:shadow-lg rounded-lg flex flex-col justify-between items-center gap-4 text-center'>
-                                            <div className='w-18 h-18 flex bg-[#D3BDF3] justify-center items-center rounded-full'>
-                                                <FaPlusCircle className='text-white text-xl' />
-                                            </div>
-                                            <h3 className='font-semibold border border-[#D3BDF3]  text-[#D3BDF3] rounded-full w-full py-1'>Create a Project</h3>
-                                            <p className='text-sm text-gray-600'>
-                                                Get feedback, views, and appreciations. Public projects can be featured by our curators.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <Projects />
                         </div>
                     </div>
                 </div>

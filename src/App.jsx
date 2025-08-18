@@ -7,7 +7,8 @@ import Supports from './Pages/Support/Supports'
 import PaymentSettings from './Pages/PaymentSettings/PaymentSettings'
 import EditProfile from './Pages/Profile/EditProfile'
 import Portfolio from './Pages/Portfolio/Portfolio'
-
+import UploadYourWork from './Pages/Portfolio/UploadYourWork'
+import Message from './Pages/Message/Message'
 
 const App = () => {
   return (
@@ -19,14 +20,10 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
            <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/portfolio" element={<Portfolio/>} />
+          <Route path="/portfolio/upload-your-work" element={<UploadYourWork/>} />
+          <Route path="/messages" element={<Message />} />
           <Route path="/support" element={<Supports />} />
           <Route path="/favorites" element={<PaymentSettings />} />
-          {/* <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/gigs" element={<Gigs />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/earnings" element={<Earnings />} />
-          <Route path="/favorites" element={<Favorites />} /> */}
         </Route>
         {/* Routes without layout */}
         
