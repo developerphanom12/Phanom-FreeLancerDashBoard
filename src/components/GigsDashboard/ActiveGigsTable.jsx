@@ -25,6 +25,7 @@ const ActiveGigsTable = ({ gigsData }) => {
   const isAllSelected = gigsData.length > 0 && selectedIds.length === gigsData.length;
 
   return (
+    <>
     <div className="bg-white rounded-xl shadow-sm p-4">
       <h2 className="text-lg font-semibold mb-4">Active Gigs</h2>
 
@@ -35,6 +36,8 @@ const ActiveGigsTable = ({ gigsData }) => {
           <span className="text-sm">Click "Create a New Gig" to get started.</span>
         </div>
       ) : (
+        
+
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -68,7 +71,7 @@ const ActiveGigsTable = ({ gigsData }) => {
                     <img
                       src={gig.image}
                       alt="Gig"
-                      className="w-16 h-12 rounded-md object-cover"
+                      className="w-22 h-12 rounded-md object-cover"
                     />
                     <span className="text-sm text-gray-700">{gig.title}</span>
                   </td>
@@ -86,8 +89,20 @@ const ActiveGigsTable = ({ gigsData }) => {
             </tbody>
           </table>
         </div>
+       
+       
       )}
     </div>
+
+     <div className="mt-3 text-right">
+        <a
+          href="#"
+          className="text-sm font-medium text-[#4A97E1] hover:underline"
+        >
+          What does your Gig status mean?
+        </a>
+      </div>
+    </>
   );
 };
 

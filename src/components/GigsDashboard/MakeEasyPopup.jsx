@@ -11,27 +11,11 @@ export default function MakeEasyPopup({ onClose, uploadedImage }) {
   const [showLogoDropdown, setShowLogoDropdown] = useState(false);
   const [showTagDropdown, setShowTagDropdown] = useState(false);
 
-  // Load saved data from localStorage
+  // Initialize with empty state (no localStorage)
   useEffect(() => {
-    const savedLogo = JSON.parse(localStorage.getItem("logoType")) || [];
-    const savedTags = JSON.parse(localStorage.getItem("customTags")) || [];
-    const savedImg = localStorage.getItem("uploadedImage") || null;
-
-    setLogoType(savedLogo);
-    setCustomTags(savedTags);
-    setSavedImage(savedImg);
+    // Component initialization without localStorage
+    // Data will be managed through props or API calls
   }, []);
-
-  // Save to localStorage whenever changes happen
-  useEffect(() => {
-    localStorage.setItem("logoType", JSON.stringify(logoType));
-    localStorage.setItem("customTags", JSON.stringify(customTags));
-
-    if (uploadedImage) {
-      localStorage.setItem("uploadedImage", uploadedImage);
-      setSavedImage(uploadedImage);
-    }
-  }, [logoType, customTags, uploadedImage]);
 
   const handleLogoSelect = (option) => {
     if (logoType.length === 0) {

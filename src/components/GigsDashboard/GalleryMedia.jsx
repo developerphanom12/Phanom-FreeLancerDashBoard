@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MakeEasyPopup from "./MakeEasyPopup";
 import { FaRegImage, FaRegPlayCircle, FaExclamationCircle } from "react-icons/fa";
 
-const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
-  const [openPopup, setOpenPopup] = useState(false);
-  const [images, setImages] = useState(initialData.images || []);
-  const [video, setVideo] = useState(initialData.video || "");
-  const [confirmed, setConfirmed] = useState(initialData.confirmed || false);
-  const [errors, setErrors] = useState({});
+const GalleryMedia = ({ onCancel, onContinue, initialData, formikProps  }) => {
+  const { values, setFieldValue } = formikProps; // 👈 ab sahi 
+  const { gallery } = values;
+  const { images = [], video = "", confirmed = false } = gallery || {};
+
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const [errors, setErrors] = React.useState({});
 
   // Disable background scroll when popup is open
   useEffect(() => {
-    if (openPopup) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = openPopup ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -28,7 +25,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
       reader.onload = (event) => {
         const newImages = [...images];
         newImages[index] = event.target.result;
-        setImages(newImages);
+        setFieldValue("gallery.images", newImages);
       };
       reader.readAsDataURL(file);
     }
@@ -38,7 +35,6 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 50 * 1024 * 1024) {
-        // 50MB validation
         setErrors((prev) => ({
           ...prev,
           video: "Video size must be less than 50MB.",
@@ -47,7 +43,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
       }
       const reader = new FileReader();
       reader.onload = (event) => {
-        setVideo(event.target.result);
+        setFieldValue("gallery.video", event.target.result);
       };
       reader.readAsDataURL(file);
     }
@@ -58,10 +54,8 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
     if (!images.some((img) => img)) {
       newErrors.images = "Please upload at least 1 image.";
     }
-    // ✅ video is optional → removed required validation
     if (!confirmed) {
-      newErrors.confirmed =
-        "You must confirm that the materials are original.";
+      newErrors.confirmed = "You must confirm that the materials are original.";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -69,7 +63,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
 
   const handleContinue = () => {
     if (validate()) {
-      onContinue({ images, video, confirmed });
+      onContinue({ gallery: { images, video, confirmed } });
     }
   };
 
@@ -120,7 +114,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
                     onClick={() => {
                       const newImages = [...images];
                       newImages[i] = null;
-                      setImages(newImages);
+                      setFieldValue("gallery.images", newImages);
                     }}
                   >
                     ✕
@@ -179,7 +173,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
             <video src={video} className="w-full h-full object-cover" controls />
             <button
               className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
-              onClick={() => setVideo("")}
+              onClick={() => setFieldValue("gallery.video", "")}
             >
               ✕
             </button>
@@ -206,7 +200,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
         <input
           type="checkbox"
           checked={confirmed}
-          onChange={(e) => setConfirmed(e.target.checked)}
+          onChange={(e) => setFieldValue("gallery.confirmed", e.target.checked)}
           className="mt-1 w-4 h-4 border-gray-300 rounded"
         />
         <label className="ml-2 text-xs text-gray-600">
@@ -243,7 +237,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData }) => {
           <div className="relative z-10">
             <MakeEasyPopup
               onClose={() => setOpenPopup(false)}
-              uploadedImage={images[0]} // pass the first uploaded image
+              uploadedImage={images[0]}
             />
           </div>
         </div>

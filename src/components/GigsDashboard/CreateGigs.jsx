@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import BasicInformation from "./BasicInformation";
 import Description from "./Description";
 import FAQSection from "./FAQSection";
@@ -18,17 +20,66 @@ const stepLabels = {
   review: "Review",
 };
 
+// Validation schema for the entire form
+const validationSchema = Yup.object({
+  basic: Yup.object({
+    title: Yup.string()
+      .min(10, "Title must be at least 10 characters")
+      .max(80, "Title cannot exceed 80 characters")
+      .required("Gig title is required"),
+    category: Yup.string().required("Category is required"),
+    subcategory: Yup.string().required("Subcategory is required"),
+    technology: Yup.string().required("Technology is required"),
+    tags: Yup.array().min(1, "At least one tag is required"),
+  }),
+  description: Yup.object({
+    description: Yup.string()
+      .min(50, "Description must be at least 50 characters")
+      .required("Description is required"),
+  }),
+  faq: Yup.object({
+    faqs: Yup.array().min(1, "At least one FAQ is required"),
+  }),
+  milestones: Yup.object({
+    milestones: Yup.array().min(1, "At least one milestone is required"),
+  }),
+  gallery: Yup.object({
+    images: Yup.array().min(1, "At least one image is required"),
+  }),
+});
+
 const CreateGigs = () => {
   const [activeStep, setActiveStep] = useState("basic");
-  const [gigData, setGigData] = useState({});
-  const [completedSteps, setCompletedSteps] = useState([]); // ✅ track completed steps
+  const [completedSteps, setCompletedSteps] = useState([]);
   const navigate = useNavigate();
 
-  const handleContinue = (step, data) => {
-    const updatedData = { ...gigData, [step]: data };
-    setGigData(updatedData);
-    localStorage.setItem("gigData", JSON.stringify(updatedData));
+  // Initial form values
+const initialValues = {
+  basic: {
+    title: "",
+    category: "",
+    subcategory: "",
+    technology: "",
+    tags: [],
+    confirmed: false,
+  },
+  description: {
+    description: "",   // object with description key
+  },
+  faq: {
+    faqs: [],          // object with faqs array
+  },
+  milestones: {
+    milestones: [],    // object with milestones array
+  },
+  gallery: {
+    images: [],
+    videos: [],
+  },
+};
 
+
+  const handleContinue = (step) => {
     const currentIndex = steps.indexOf(step);
 
     // Mark current step as completed
@@ -49,23 +100,62 @@ const CreateGigs = () => {
     }
   };
 
-  const handleUpload = () => {
-    localStorage.setItem("gigData", JSON.stringify(gigData));
-    alert("Gig created successfully!");
-    navigate("/");
-  };
+ const handleSubmit = async (values) => {
+  try {
+    console.log("Submitting gig data:", values);
+
+    const payload = {
+      basic: values.basic,
+      description: values.description,
+      faq: values.faq,
+      milestones: values.milestones,
+      gallery: values.gallery,
+    };
+
+    // yaha API call karo
+    // await api.post("/gigs", payload);
+
+    console.log("Gig created successfully!");
+  } catch (error) {
+    console.error("Error creating gig:", error);
+  }
+};
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-600">
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(values) => handleSubmit(values)}
+      enableReinitialize={true}
+      validateOnChange={true}
+    >
+      {(formikProps) => {
+        const { values } = formikProps;
+
+        React.useEffect(() => {
+          console.log("onChange Data:", {
+            
+              gigs: values,
+            
+          });
+        }, [values]);
+return(
+        <div className="min-h-screen  text-gray-600">
       {/* Navbar */}
-      <div className="bg-gray-100 shadow-sm">
+      <div className="bg-gray-100 ">
         <div className="flex items-center justify-between px-6 py-4">
           <h1 className="text-xl font-semibold">Create Gigs</h1>
           <div className="flex space-x-3">
-            <button className="px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-100 text-sm">
+            <button
+              type="button"
+              className="px-4 py-2 border border-gray-300 hover:bg-gray-200 rounded-lg text-sm"
+            >
               Save
             </button>
-            <button className="px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 text-sm">
+            <button
+              type="button"
+              className="px-4 py-2 border border-gray-300 hover:bg-gray-200 rounded-lg text-sm"
+            >
               Save & Preview
             </button>
           </div>
@@ -111,47 +201,55 @@ const CreateGigs = () => {
         {activeStep === "basic" && (
           <BasicInformation
             onCancel={() => navigate(-1)}
-            onContinue={(data) => handleContinue("basic", data)}
-            initialData={gigData.basic || {}}
+            onContinue={() => handleContinue("basic")}
+            initialData={formikProps.values.basic}
+            formikProps={formikProps}
           />
         )}
         {activeStep === "description" && (
           <Description
             onCancel={() => handleBack("description")}
-            onContinue={(data) => handleContinue("description", data)}
-            initialData={gigData.description || {}}
+            onContinue={() => handleContinue("description")}
+            initialData={formikProps.values.description}
+            formikProps={formikProps}
           />
         )}
         {activeStep === "faq" && (
           <FAQSection
             onCancel={() => handleBack("faq")}
-            onContinue={(data) => handleContinue("faq", data)}
-            initialData={gigData.faq || {}}
+            onContinue={() => handleContinue("faq")}
+            initialData={formikProps.values.faq}
+            formikProps={formikProps}
           />
         )}
         {activeStep === "milestones" && (
           <Milestones
             onCancel={() => handleBack("milestones")}
-            onContinue={(data) => handleContinue("milestones", data)}
-            initialData={gigData.milestones || {}}
+            onContinue={() => handleContinue("milestones")}
+            initialData={formikProps.values.milestones}
+            formikProps={formikProps}
           />
         )}
         {activeStep === "gallery" && (
           <GalleryMedia
             onCancel={() => handleBack("gallery")}
-            onContinue={(data) => handleContinue("gallery", data)}
-            initialData={gigData.gallery || {}}
+            onContinue={() => handleContinue("gallery")}
+            initialData={formikProps.values.gallery}
+            formikProps={formikProps}
           />
         )}
         {activeStep === "review" && (
           <Review
             onBack={() => handleBack("review")}
-            onUpload={handleUpload}
-            gigData={gigData}
+            gigData={formikProps.values}
+            onSubmit={() => handleSubmit(formikProps.values)}
           />
         )}
       </div>
     </div>
+    );
+  }}
+  </Formik>
   );
 };
 

@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 
-const FAQSection = ({ onCancel, onContinue, initialData }) => {
+const FAQSection = ({ onCancel, onContinue, initialData, formikProps }) => {
+  const { values, setFieldValue } = formikProps;
+  const faqs = values.faq.faqs || [];
+
   const [showForm, setShowForm] = useState(false);
-  const [faqs, setFaqs] = useState(initialData.faqs || []);
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [errors, setErrors] = useState({ question: "", answer: "", global: "" });
-
-  useEffect(() => {
-    if (initialData.faqs) {
-      setFaqs(initialData.faqs);
-    }
-  }, [initialData]);
 
   const validateInputs = () => {
     let valid = true;
@@ -43,10 +39,12 @@ const FAQSection = ({ onCancel, onContinue, initialData }) => {
 
     const newFAQ = {
       question: currentQuestion.trim(),
-      answer: currentAnswer.trim()
+      answer: currentAnswer.trim(),
     };
 
-    setFaqs([...faqs, newFAQ]);
+    const updatedFaqs = [...faqs, newFAQ];
+    setFieldValue("faq.faqs", updatedFaqs);
+
     setCurrentQuestion("");
     setCurrentAnswer("");
     setShowForm(false);
@@ -56,12 +54,15 @@ const FAQSection = ({ onCancel, onContinue, initialData }) => {
   const removeFAQ = (index) => {
     const updatedFaqs = [...faqs];
     updatedFaqs.splice(index, 1);
-    setFaqs(updatedFaqs);
+    setFieldValue("faq.faqs", updatedFaqs);
   };
 
-  const handleContinue = () => {
+  const handleContinueClick = () => {
     if (faqs.length === 0) {
-      setErrors({ ...errors, global: "Please add at least one FAQ before continuing." });
+      setErrors({
+        ...errors,
+        global: "Please add at least one FAQ before continuing.",
+      });
       return;
     }
     setErrors({ question: "", answer: "", global: "" });
@@ -81,7 +82,9 @@ const FAQSection = ({ onCancel, onContinue, initialData }) => {
 
       {/* Global Error */}
       {errors.global && (
-        <div className="mt-3 text-red-500 text-sm font-medium">{errors.global}</div>
+        <div className="mt-3 text-red-500 text-sm font-medium">
+          {errors.global}
+        </div>
       )}
 
       {/* Existing FAQs */}
@@ -203,7 +206,7 @@ const FAQSection = ({ onCancel, onContinue, initialData }) => {
           Cancel
         </button>
         <button
-          onClick={handleContinue}
+          onClick={handleContinueClick}
           className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:opacity-90 text-sm"
         >
           Save and Continue

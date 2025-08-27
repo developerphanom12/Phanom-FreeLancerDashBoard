@@ -11,6 +11,7 @@ import UploadYourWork from './Pages/Portfolio/UploadYourWork'
 import Message from './Pages/Message/Message'
 import Gigs from './Pages/MyGigs/MyGigs'
 import CreateGigs from './components/GigsDashboard/CreateGigs'
+import Earnings from './Pages/Earnings/Earnings'
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/favorites" element={<PaymentSettings />} />
           <Route path="/gigs" element={<Gigs />} />
           <Route path="/gigs/create-gigs" element={<CreateGigs/>} />
+          {/* <Route path="/earnings" element={<Earnings/>} /> */}
           {/* <Route path="/orders" element={<Orders />} />
           <Route path="/earnings" element={<Earnings />} /> */}
         </Route>

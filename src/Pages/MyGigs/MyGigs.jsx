@@ -20,7 +20,7 @@ const Gigs = () => {
       clicks: 0,
       orders: 0,
       cancellations: "0%",
-      image: "https://via.placeholder.com/80x60.png?text=Gig+1",
+      image: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/graphics-design-poster-gig-banner-template-16c2c2b59ad298534eebe31ed4a50c4e_screen.jpg?ts=1676322408",
     },
     {
       id: 2,
@@ -30,46 +30,28 @@ const Gigs = () => {
       clicks: 0,
       orders: 0,
       cancellations: "0%",
-      image: "https://via.placeholder.com/80x60.png?text=Gig+2",
+      image: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/graphics-design-poster-gig-banner-template-16c2c2b59ad298534eebe31ed4a50c4e_screen.jpg?ts=1676322408",
     },
   ];
 
-  // Load gigs (on mount + when localStorage changes)
-  const loadGigs = () => {
-    const storedGig = localStorage.getItem("gigData");
-    let parsedGig = storedGig ? JSON.parse(storedGig) : null;
+  // Load gigs from API (placeholder for future API integration)
+  const loadGigs = async () => {
+    try {
+      // TODO: Replace with actual API call
+      // const response = await fetch('/api/gigs');
+      // const data = await response.json();
+      // setGigsData(data);
 
-    if (parsedGig) {
-      parsedGig = {
-        id: Date.now(),
-        title: parsedGig.title || "Untitled Gig",
-        impressions: 0,
-        clicks: 0,
-        orders: 0,
-        cancellations: "0%",
-        image:
-          parsedGig.image ||
-          "https://via.placeholder.com/80x60.png?text=New+Gig",
-      };
-
-      setGigsData([parsedGig, ...defaultGigs]);
-    } else {
+      // For now, use default gigs
+      setGigsData(defaultGigs);
+    } catch (error) {
+      console.error('Error loading gigs:', error);
       setGigsData(defaultGigs);
     }
   };
 
   useEffect(() => {
     loadGigs();
-
-    // 👇 Listen to changes in localStorage (other tabs or after create gig)
-    const handleStorageChange = (event) => {
-      if (event.key === "gigData") {
-        loadGigs();
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   return (
@@ -86,7 +68,7 @@ const Gigs = () => {
       </div>
 
       {/* Tabs + Filter */}
-      <div className="flex items-center justify-between border-b border-gray-200 mb-6">
+      <div className="flex items-center justify-between  border-gray-200 mb-6">
         <div className="flex space-x-6">
           <button
             className={`pb-2 font-medium ${
@@ -121,9 +103,15 @@ const Gigs = () => {
         </div>
 
         <div>
-          <button className="flex items-center border border-gray-300 px-3 py-1.5 rounded-md text-gray-600 hover:bg-gray-50">
-            Last 30 Days <HiChevronDown className="ml-2" />
-          </button>
+          <select
+  className="border border-gray-300 px-3 py-1.5 rounded-md text-gray-600 hover:bg-gray-50"
+  defaultValue="30days"
+>
+  <option value="7days">Last 7 Days</option>
+  <option value="30days">Last 30 Days</option>
+  <option value="90days">Last 90 Days</option>
+</select>
+
         </div>
       </div>
 

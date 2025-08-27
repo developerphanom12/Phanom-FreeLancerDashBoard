@@ -6,12 +6,12 @@ const PaymentSettings = () => {
 
   return (
     <div className="p-5">
-      <h2 className="text-[30px] font-medium leading-[42px] capitalize mb-3 font-[Poppins]">
+      <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
         Payment Settings
       </h2>
 
       <div className="bg-white p-5 rounded-lg shadow-sm mb-8">
-        <h3 className="text-[24px] font-medium leading-[30px] capitalize mb-6 font-[Poppins]">
+        <h3 className="text-[24px] font-medium leading-[30px] capitalize mb-6 ">
           Payout Settings
         </h3>
 
@@ -55,7 +55,7 @@ const PaymentSettings = () => {
           {/* Row 1 */}
           <div className="flex gap-6">
             <div className="flex flex-col flex-1">
-              <label className="text-[16px] font-[Poppins] mb-2">
+              <label className="text-[16px]  mb-2">
                 Bank Account<span className="text-red-500 ml-1">*</span>
               </label>
               <select className="p-3 border border-gray-300 rounded-lg text-sm">
@@ -64,7 +64,7 @@ const PaymentSettings = () => {
               </select>
             </div>
             <div className="flex flex-col flex-1">
-              <label className="text-[16px] font-[Poppins] mb-2">
+              <label className="text-[16px]  mb-2">
                 Bank BIC/SWIFT<span className="text-red-500 ml-1">*</span>
               </label>
               <input
@@ -78,7 +78,7 @@ const PaymentSettings = () => {
           {/* Row 2 */}
           <div className="flex gap-6">
             <div className="flex flex-col flex-1">
-              <label className="text-[16px] font-[Poppins] mb-2">
+              <label className="text-[16px]  mb-2">
                 Bank Address<span className="text-red-500 ml-1">*</span>
               </label>
               <input
@@ -88,7 +88,7 @@ const PaymentSettings = () => {
               />
             </div>
             <div className="flex flex-col flex-1">
-              <label className="text-[16px] font-[Poppins] mb-2">
+              <label className="text-[16px]  mb-2">
                 Bank City<span className="text-red-500 ml-1">*</span>
               </label>
               <input
@@ -102,7 +102,7 @@ const PaymentSettings = () => {
           {/* Row 3 */}
           <div className="flex gap-6">
             <div className="flex flex-col flex-1">
-              <label className="text-[16px] font-[Poppins] mb-2">
+              <label className="text-[16px]  mb-2">
                 Bank Province/State<span className="text-red-500 ml-1">*</span>
               </label>
               <select className="p-3 border border-gray-300 rounded-lg text-sm">
@@ -111,7 +111,7 @@ const PaymentSettings = () => {
               </select>
             </div>
             <div className="flex flex-col flex-1">
-              <label className="text-[16px] font-[Poppins] mb-2">
+              <label className="text-[16px]  mb-2">
                 Account Number<span className="text-red-500 ml-1">*</span>
               </label>
               <input
@@ -124,7 +124,7 @@ const PaymentSettings = () => {
 
           {/* Row 4 */}
           <div className="flex flex-col w-[49%]">
-            <label className="text-[16px] font-[Poppins] mb-2">
+            <label className="text-[16px]  mb-2">
               Name of Account Holder (as shown on bank statement)
               <span className="text-red-500 ml-1">*</span>
             </label>
@@ -155,10 +155,10 @@ const PaymentSettings = () => {
 
       {/* ---------------- Payment History ---------------- */}
       <div className="bg-white p-5 rounded-lg shadow-sm overflow-x-auto">
-        <h3 className="text-[24px] font-medium leading-[30px] capitalize mb-4 font-[Poppins]">
+        <h3 className="text-[24px] font-medium leading-[30px] capitalize mb-4 ">
           Payment History
         </h3>
-        <table className="w-full border-collapse font-[Poppins] text-sm rounded-lg overflow-hidden">
+        <table className="w-full border-collapse  text-sm rounded-lg overflow-hidden">
           <thead>
             <tr className="text-[#6F6F6F] text-left">
               <th className="p-3">AMOUNT</th>

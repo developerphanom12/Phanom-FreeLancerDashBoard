@@ -2,15 +2,30 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Images from "../../assets/Images"; 
 
-const Review = ({ onBack, gigData }) => {
+const Review = ({ onBack, onSubmit, gigData = {} }) => {
   const navigate = useNavigate();
 
-  const handleUpload = () => {
-    // Save final data to localStorage
-    localStorage.setItem("gigData", JSON.stringify(gigData));
+  // fallback defaults so UI never crashes
+  const safeGigData = {
+    basic: {},
+    description: {},
+    faq: { faqs: [] },
+    milestones: { milestones: [] },
+    gallery: { images: [] },
+    ...gigData,
+  };
 
-    // Redirect to Gigs page
-    navigate("/gigs");
+  const handleUpload = async () => {
+    try {
+      // Call the onSubmit function passed from parent (Formik's handleSubmit)
+      await onSubmit(safeGigData);
+
+      // Redirect to Gigs page after successful submission
+      navigate("/gigs");
+    } catch (error) {
+      console.error("Error submitting gig:", error);
+      alert("Error creating gig. Please try again.");
+    }
   };
 
   return (
@@ -47,12 +62,14 @@ const Review = ({ onBack, gigData }) => {
       {/* Buttons */}
       <div className="flex justify-start space-x-3 mt-6">
         <button
+          type="button"
           onClick={onBack}
           className="px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-100 text-sm"
         >
           Back
         </button>
         <button
+          type="button"
           onClick={handleUpload}
           className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:opacity-90 text-sm"
         >

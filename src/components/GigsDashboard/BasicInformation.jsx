@@ -1,47 +1,44 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Field, ErrorMessage } from "formik";
 
-export default function BasicInformation({ onCancel, onContinue, initialData }) {
+export default function BasicInformation({ onCancel, onContinue, initialData, formikProps }) {
   const [tags, setTags] = useState(initialData.tags || []);
   const [tagInput, setTagInput] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm({
-    defaultValues: {
-      title: initialData.title || "",
-      category: initialData.category || "",
-      subcategory: initialData.subcategory || "",
-      technology: initialData.technology || "",
-      confirmed: initialData.confirmed || false,
-    },
-  });
+  // Use Formik's values and methods
+  const { values, setFieldValue, errors, touched } = formikProps;
 
   const addTag = (e) => {
     e.preventDefault();
     if (tagInput && tags.length < 5) {
-      setTags([...tags, tagInput]);
+      const newTags = [...tags, tagInput];
+      setTags(newTags);
+      setFieldValue('basic.tags', newTags);
       setTagInput("");
     }
   };
 
   const removeTag = (tag) => {
-    setTags(tags.filter((t) => t !== tag));
+    const newTags = tags.filter((t) => t !== tag);
+    setTags(newTags);
+    setFieldValue('basic.tags', newTags);
   };
 
-  const onSubmit = (data) => {
-    const finalData = { ...data, tags };
-    onContinue(finalData);
+  const handleContinue = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    // Update Formik values with current tags
+    setFieldValue('basic.tags', tags);
+
+    // Call the parent's onContinue function
+    onContinue();
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full bg-white shadow-sm rounded-xl p-6 mt-6 px-6"
-    >
+    <div className="w-full bg-white shadow-sm rounded-xl p-6 px-6">
       {/* Gig Title */}
       <div className="mb-6">
         <h2 className="text-lg font-medium">Gig Title</h2>
@@ -55,72 +52,58 @@ export default function BasicInformation({ onCancel, onContinue, initialData }) 
       {/* Category */}
       <div className="mb-6">
         <h2 className="text-lg font-medium">Gig Title</h2>
-         <input
+         <Field
+          name="basic.title"
           type="text"
           placeholder="Write your gig's title..."
-          {...register("title", {
-            required: "Gig title is required",
-            minLength: {
-              value: 10,
-              message: "Title must be at least 10 characters",
-            },
-            maxLength: {
-              value: 80,
-              message: "Title cannot exceed 80 characters",
-            },
-          })}
           className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-purple-500"
         />
-        {errors.title && (
-          <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
-        )}
+        <ErrorMessage name="basic.title" component="p" className="text-red-500 text-sm mt-1" />
         <h2 className="text-lg font-medium">Category</h2>
         <p className="text-sm text-gray-500 mb-2">
           Choose The Category And Sub-Category Most Suitable For Your Gig.
         </p>
         <div className="grid grid-cols-2 gap-4">
-          <select
-            {...register("category", { required: "Category is required" })}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-purple-500"
-          >
-            <option value="">Select a category</option>
-            <option value="web">Web Development</option>
-            <option value="design">Design</option>
-            <option value="marketing">Marketing</option>
-          </select>
-          {errors.category && (
-            <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
-          )}
+          <div>
+            <Field
+              as="select"
+              name="basic.category"
+              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="">Select a category</option>
+              <option value="web">Web Development</option>
+              <option value="design">Design</option>
+              <option value="marketing">Marketing</option>
+            </Field>
+            <ErrorMessage name="basic.category" component="p" className="text-red-500 text-sm mt-1" />
+          </div>
 
-          <select
-            {...register("subcategory", { required: "Subcategory is required" })}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-purple-500"
-          >
-            <option value="">Select a subcategory</option>
-            <option value="frontend">Frontend</option>
-            <option value="backend">Backend</option>
-            <option value="seo">SEO</option>
-          </select>
-          {errors.subcategory && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.subcategory.message}
-            </p>
-          )}
+          <div>
+            <Field
+              as="select"
+              name="basic.subcategory"
+              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="">Select a subcategory</option>
+              <option value="frontend">Frontend</option>
+              <option value="backend">Backend</option>
+              <option value="seo">SEO</option>
+            </Field>
+            <ErrorMessage name="basic.subcategory" component="p" className="text-red-500 text-sm mt-1" />
+          </div>
         </div>
       </div>
 
       {/* Technology Used */}
       <div className="mb-6">
         <h2 className="text-lg font-medium">Technology Used</h2>
-        <input
+        <Field
+          name="basic.technology"
           type="text"
           placeholder="Select technologies"
-          {...register("technology", { required: "Technology is required" })}
           className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-purple-500"
         />
-        {errors.technology && (
-          <p className="text-red-500 text-sm mt-1">{errors.technology.message}</p>
-        )}
+        <ErrorMessage name="basic.technology" component="p" className="text-red-500 text-sm mt-1" />
       </div>
 
       {/* Search Tags */}
@@ -164,10 +147,10 @@ export default function BasicInformation({ onCancel, onContinue, initialData }) 
 
       {/* Confirmation Checkbox */}
       <div className="mb-6 flex items-start space-x-3">
-        <input
+        <Field
           type="checkbox"
+          name="basic.confirmed"
           id="confirm"
-          {...register("confirmed", { required: "You must confirm ownership" })}
           className="h-4 w-4 mt-1 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
         />
         <label htmlFor="confirm" className="text-sm">
@@ -177,9 +160,7 @@ export default function BasicInformation({ onCancel, onContinue, initialData }) 
           Service And May Result In My Account Being Blocked.
         </label>
       </div>
-      {errors.confirmed && (
-        <p className="text-red-500 text-sm mt-1">{errors.confirmed.message}</p>
-      )}
+      <ErrorMessage name="basic.confirmed" component="p" className="text-red-500 text-sm mt-1" />
 
       {/* Footer Buttons */}
       <div className="flex justify-start space-x-3 mt-6">
@@ -191,12 +172,13 @@ export default function BasicInformation({ onCancel, onContinue, initialData }) 
           Cancel
         </button>
         <button
-          type="submit"
-          className="px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700"
+          type="button"
+          onClick={handleContinue}
+          className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:opacity-90 text-sm"
         >
           Save and Continue
         </button>
       </div>
-    </form>
+    </div>
   );
 }

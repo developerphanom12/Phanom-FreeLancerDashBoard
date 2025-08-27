@@ -1,10 +1,11 @@
-import PhanomLogo from "./phanomLogo.png";
-import Card1 from "./card1.png";
-import Card2 from "./card2.png";
-import Card3 from "./card3.png";
-import Card4 from "./card4.png";
-import Send from "./Send.png"
-import Message from "./message.png"
+import PhanomLogo from "./media/phanomLogo.png";
+import Card1 from "./media/card1.png";
+import Card2 from "./media/card2.png";
+import Card3 from "./media/card3.png";
+import Card4 from "./media/card4.png";
+import Send from "./media/Send.png"
+import Message from "./media/message.png"
+import Congratulations from "./media/Congratulations.png";
 
 const Images = {
     PhanomLogo,
@@ -13,7 +14,8 @@ const Images = {
     Card3,
     Card4,
     Send,
-    Message
+    Message,
+    Congratulations,
 };
 
 export default Images;

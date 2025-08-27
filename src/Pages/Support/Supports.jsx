@@ -3,15 +3,15 @@ import upload from '../../assets/upload.svg';
 const Supports = () => {
     return (
         <div className="p-5">
-            <h2 className="text-[30px] font-medium leading-[42px] capitalize font-[Poppins] mt-0">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900">
                 Supports
             </h2>
 
             <div className="bg-white rounded-lg p-5 shadow-md mt-4">
-                <h3 className="text-[24px] font-medium leading-[30px] capitalize font-[Poppins] mb-3">
+                <h3 className="text-[24px] font-medium leading-[30px] capitalize  mb-3">
                     Customer Support
                 </h3>
-                <p className="text-[16px] text-[#6F6F6F] font-[Poppins] mb-2 leading-6">
+                <p className="text-[16px] text-[#6F6F6F]  mb-2 leading-6">
                     Deliver Seamless Assistance And Improve User Experience.
                 </p>
 
@@ -19,7 +19,7 @@ const Supports = () => {
                     {/* Row 1 */}
                     <div className="flex flex-wrap gap-6">
                         <div className="flex flex-col flex-1">
-                            <label htmlFor="name" className="text-[16px] font-[Poppins] mb-1">
+                            <label htmlFor="name" className="text-[16px]  mb-1">
                                 Name <span className="text-red-500 ml-1">*</span>
                             </label>
                             <input
@@ -31,7 +31,7 @@ const Supports = () => {
                         </div>
 
                         <div className="flex flex-col flex-1">
-                            <label htmlFor="subject" className="text-[16px] font-[Poppins] mb-1">
+                            <label htmlFor="subject" className="text-[16px]  mb-1">
                                 Subject <span className="text-red-500 ml-1">*</span>
                             </label>
                             <textarea
@@ -44,7 +44,7 @@ const Supports = () => {
 
                     {/* Upload Section */}
                     <div className="flex flex-col w-1/2">
-                        <label className="text-[16px] font-[Poppins] mb-1">
+                        <label className="text-[16px]  mb-1">
                             Upload Attachment <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="relative border border-gray-300 rounded-md px-4 py-3 bg-white text-sm text-gray-500 flex items-center justify-between cursor-pointer">
