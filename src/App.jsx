@@ -9,6 +9,8 @@ import EditProfile from './Pages/Profile/EditProfile'
 import Portfolio from './Pages/Portfolio/Portfolio'
 import UploadYourWork from './Pages/Portfolio/UploadYourWork'
 import Message from './Pages/Message/Message'
+import Gigs from './Pages/MyGigs/MyGigs'
+import CreateGigs from './components/GigsDashboard/CreateGigs'
 
 const App = () => {
   return (
@@ -24,6 +26,10 @@ const App = () => {
           <Route path="/messages" element={<Message />} />
           <Route path="/support" element={<Supports />} />
           <Route path="/favorites" element={<PaymentSettings />} />
+          <Route path="/gigs" element={<Gigs />} />
+          <Route path="/gigs/create-gigs" element={<CreateGigs/>} />
+          {/* <Route path="/orders" element={<Orders />} />
+          <Route path="/earnings" element={<Earnings />} /> */}
         </Route>
         {/* Routes without layout */}
         
