@@ -189,7 +189,7 @@ return(
                 >
                   {index + 1}
                 </span>
-                <span>{stepLabels[step]}</span>
+                <span className="hidden sm:block">{stepLabels[step]}</span>
               </div>
             );
           })}

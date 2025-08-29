@@ -40,11 +40,11 @@ const MilestoneTable = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-scroll  ">
       <div className="px-6 py-4 ">
         <h3 className="text-lg font-semibold text-gray-900">Active Milestone</h3>
       </div>
-      <div className="overflow-x-auto">
+      <div className="">
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>

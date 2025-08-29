@@ -104,7 +104,7 @@ const Gigs = () => {
 
         <div>
           <select
-  className="border border-gray-300 px-3 py-1.5 rounded-md text-gray-600 hover:bg-gray-50"
+  className="hidden sm:block border border-gray-300 px-3 py-1.5 rounded-md text-gray-600 hover:bg-gray-50"
   defaultValue="30days"
 >
   <option value="7days">Last 7 Days</option>

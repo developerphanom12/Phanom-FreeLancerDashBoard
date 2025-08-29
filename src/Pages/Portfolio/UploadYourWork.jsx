@@ -3,6 +3,7 @@ import { BiText } from 'react-icons/bi'
 import { CiGrid42 } from 'react-icons/ci'
 import { FaImage, FaTimes, FaPlus } from 'react-icons/fa'
 import JoditEditor from 'jodit-react'
+import { useNavigate } from 'react-router-dom'
 
 const UploadYourWork = () => {
     const [activeMode, setActiveMode] = useState(null) // 'image', 'text', 'grid'
@@ -11,7 +12,7 @@ const UploadYourWork = () => {
     const [textContent, setTextContent] = useState('')
     const fileInputRef = useRef(null)
     const gridFileInputRef = useRef(null)
-
+    const navigate = useNavigate()
     const handleImageUpload = (event) => {
         const files = Array.from(event.target.files)
         files.forEach(file => {
@@ -70,12 +71,22 @@ const UploadYourWork = () => {
             <div className='flex justify-between mb-3'>
                 <h1 className="text-2xl font-bold text-gray-900">Upload Your Work</h1>
                 {activeMode && (
-                    <button
-                        onClick={resetToInitial}
-                        className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
-                    >
-                        Back to Start
-                    </button>
+
+                    <div className="flex gap-4">
+                        <button
+                            onClick={() => navigate("/portfolio/upload-your-work/sell-your-work")}
+                            type="button"
+                            className="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white shadow-md hover:bg-gray-100"
+                        >
+                            Sell & Upload
+                        </button>
+                        <button
+                            type="submit"
+                            className="px-4 py-2 text-sm text-white rounded-lg bg-gradient-to-r from-[#459CE1] to-[#D11AE7] hover:opacity-90"
+                        >
+                            Upload
+                        </button>
+                    </div>
                 )}
             </div>
 
@@ -107,7 +118,7 @@ const UploadYourWork = () => {
                             onClick={() => handleModeSelect('image')}
                         >
                             <div className='bg-[#8E59E2] w-14 h-14 rounded-full flex justify-center items-center'>
-                                <FaImage className='text-white'/>
+                                <FaImage className='text-white' />
                             </div>
                             <p className='text-purple-500'>Image</p>
                         </div>
@@ -116,7 +127,7 @@ const UploadYourWork = () => {
                             onClick={() => handleModeSelect('text')}
                         >
                             <div className='bg-[#8E59E2] w-14 h-14 rounded-full flex justify-center items-center'>
-                                <BiText className='text-white'/>
+                                <BiText className='text-white' />
                             </div>
                             <p className='text-purple-500'>Text</p>
                         </div>
@@ -125,7 +136,7 @@ const UploadYourWork = () => {
                             onClick={() => handleModeSelect('grid')}
                         >
                             <div className='bg-[#8E59E2] w-14 h-14 rounded-full flex justify-center items-center'>
-                                <CiGrid42 className='text-white'/>
+                                <CiGrid42 className='text-white' />
                             </div>
                             <p className='text-purple-500'>Photo Grid</p>
                         </div>
@@ -138,12 +149,6 @@ const UploadYourWork = () => {
                 <div className='space-y-6'>
                     <div className='flex justify-between items-center'>
                         <h3 className='text-xl font-semibold'>Upload Images</h3>
-                        <button
-                            onClick={() => fileInputRef.current?.click()}
-                            className="bg-[#8E59E2] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
-                        >
-                            <FaPlus /> Add More Images
-                        </button>
                     </div>
 
                     {uploadedImages.length === 0 ? (
@@ -152,27 +157,47 @@ const UploadYourWork = () => {
                             <p className='text-gray-500'>No images uploaded yet. Click "Add More Images" to start.</p>
                         </div>
                     ) : (
-                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                            {uploadedImages.map((image) => (
-                                <div key={image.id} className='relative group'>
-                                    <img
-                                        src={image.src}
-                                        alt={image.name}
-                                        className='w-full h-48 object-cover rounded-lg'
-                                    />
-                                    <button
-                                        onClick={() => removeImage(image.id)}
-                                        className='absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity'
-                                    >
-                                        <FaTimes />
-                                    </button>
-                                    <div className='absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg'>
-                                        <p className='text-sm truncate'>{image.name}</p>
+                        <div>
+
+                            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                                {uploadedImages.map((image) => (
+                                    <div key={image.id} className='relative group'>
+                                        <img
+                                            src={image.src}
+                                            alt={image.name}
+                                            className='w-full h-48 object-cover rounded-lg'
+                                        />
+                                        <button
+                                            onClick={() => removeImage(image.id)}
+                                            className='absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity'
+                                        >
+                                            <FaTimes />
+                                        </button>
+                                        <div className='absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg'>
+                                            <p className='text-sm truncate'>{image.name}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+
                         </div>
                     )}
+
+                    <div className='flex gap-2 '>
+
+                        <button
+                            onClick={resetToInitial}
+                            className="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white shadow-md hover:bg-gray-100"
+                        >
+                            Back to Start
+                        </button>
+                        <button
+                            onClick={() => fileInputRef.current?.click()}
+                            className="bg-[#8E59E2] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
+                        >
+                            <FaPlus /> Add More Images
+                        </button>
+                    </div>
                 </div>
             )}
 
@@ -213,12 +238,12 @@ const UploadYourWork = () => {
                 <div className='space-y-6'>
                     <div className='flex justify-between items-center'>
                         <h3 className='text-xl font-semibold'>Photo Grid</h3>
-                        <button
+                        {/* <button
                             onClick={() => gridFileInputRef.current?.click()}
                             className="bg-[#8E59E2] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
                         >
                             <FaPlus /> Add Images to Grid
-                        </button>
+                        </button> */}
                     </div>
 
                     {gridImages.length === 0 ? (
@@ -245,6 +270,21 @@ const UploadYourWork = () => {
                             ))}
                         </div>
                     )}
+                    <div className='flex gap-2 '>
+
+                        <button
+                            onClick={resetToInitial}
+                            className="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white shadow-md hover:bg-gray-100"
+                        >
+                            Back to Start
+                        </button>
+                        <button
+                            onClick={() => gridFileInputRef.current?.click()}
+                             className="bg-[#8E59E2] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
+                        >
+                            <FaPlus /> Add More Images
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

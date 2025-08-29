@@ -31,6 +31,6 @@ const EarningsCards = () => {
       />
     </div>
   );
-};
+}; 
 
 export default EarningsCards;

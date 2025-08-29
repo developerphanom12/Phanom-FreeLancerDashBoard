@@ -17,7 +17,7 @@ const RecentServiceOrdersEarnings = () => {
             View Payment Settings
           </button>
         </div>
-      </div>
+      </div> 
     </div>
   );
 };

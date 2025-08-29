@@ -54,9 +54,27 @@ const PaymentHistoryTable = () => {
     item.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const getStatusClasses = (status) => {
+  switch (status.toLowerCase()) {
+    case "progress":
+      return "bg-[#D4EDDA] text-[#155724]";
+    case "cancelled":
+      return "bg-[#F8D7DA] text-[#721C24]";
+    case "in review":
+      return "bg-yellow-100 text-yellow-800";
+    case "pending":
+      return "bg-blue-100 text-blue-800";
+    case "completed":
+      return "bg-[#CCE5FF] text-[#004085]";
+    default:
+      return "bg-gray-100 text-gray-800";
+  }
+};
+
+
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-      <div className="px-6 py-4 border-b border-gray-200">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 ">
+      <div className="px-6 py-4 ">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment History</h3>
         
         {/* Search and Sort */}
@@ -88,7 +106,7 @@ const PaymentHistoryTable = () => {
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 DATE
@@ -104,7 +122,7 @@ const PaymentHistoryTable = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white ">
             {filteredHistory.map((item) => (
               <tr key={item.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -117,9 +135,10 @@ const PaymentHistoryTable = () => {
                   {item.amount}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`text-sm font-medium ${item.statusColor}`}>
-                    {item.status}
-                  </span>
+                 <span className={`text-sm font-medium px-3 py-1 rounded-full ${getStatusClasses(item.status)}`}>
+                {item.status}
+              </span>
+
                 </td>
               </tr>
             ))}
@@ -130,4 +149,4 @@ const PaymentHistoryTable = () => {
   );
 };
 
-export default PaymentHistoryTable;
+export default PaymentHistoryTable; 
