@@ -155,7 +155,7 @@ const EditProfile = () => {
             ].map((skill, i) => (
               <span
                 key={i}
-                className="px-4 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-100 cursor-default"
+                className="px-6 py-2 border bg-[#F5F7F9] border-gray-300 drop-shadow-sm rounded-full text-sm hover:bg-gray-100 cursor-default"
               >
                 {skill}
               </span>

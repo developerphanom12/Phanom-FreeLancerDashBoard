@@ -8,12 +8,13 @@ const DeniedGigsTable = () => {
   const gigsData = [
     {
       id: 1,
-      title: "Build a scalable saas web application for accounting CR, or business automation",
-      impressions: 0,
+      title:
+        "Build a scalable saas web application for accounting CR, or business automation",
+      impressions: 38,
       clicks: 0,
       orders: 0,
       cancellations: "0%",
-      image: "https://via.placeholder.com/80x60.png?text=Denied+Gig",
+      image: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/graphics-design-poster-gig-banner-template-16c2c2b59ad298534eebe31ed4a50c4e_screen.jpg?ts=1676322408",
     },
   ];
 
@@ -35,57 +36,69 @@ const DeniedGigsTable = () => {
     <div className="bg-white rounded-xl shadow-sm p-4">
       <h2 className="text-lg font-semibold mb-4">Denied Gigs</h2>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="text-sm text-gray-500 ">
-              <th className="px-4 py-2">
-                <input
-                  type="checkbox"
-                  checked={selectAll}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              <th className="px-4 py-2">Gig</th>
-              <th className="px-4 py-2 text-center">Impressions</th>
-              <th className="px-4 py-2 text-center">Clicks</th>
-              <th className="px-4 py-2 text-center">Orders</th>
-              <th className="px-4 py-2 text-center">Cancellations</th>
-              <th className="px-4 py-2 text-center">-</th>
-            </tr>
-          </thead>
-          <tbody>
+      {gigsData.length === 0 ? (
+        <div className="text-center text-gray-500 py-6">
+          No denied gigs available.
+        </div>
+      ) : (
+        <>
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="text-sm text-gray-500">
+                  <th className="px-4 py-2">Gig</th>
+                  <th className="px-4 py-2">Reason</th>
+                  <th className="px-4 py-2">Date</th>
+                  <th className="px-4 py-2 text-center">-</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gigsData.map((gig) => (
+                  <tr key={gig.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-3 flex items-center space-x-3">
+                      <img
+                        src={gig.image}
+                        alt="Gig"
+                        className="w-22 h-12 rounded-md object-cover"
+                      />
+                      <span className="text-sm text-gray-700">{gig.title}</span>
+                    </td>
+                    <td className="px-4 py-3 text-sm">{gig.reason}</td>
+                    <td className="px-4 py-3 text-sm">{gig.date}</td>
+                    <td className="px-4 py-3 text-center">
+                      {/* Actions if any */}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Cards */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
             {gigsData.map((gig) => (
-              <tr key={gig.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3">
-                  <input
-                    type="checkbox"
-                    checked={!!selected[gig.id]}
-                    onChange={() => handleSelect(gig.id)}
-                  />
-                </td>
-                <td className="px-4 py-3 flex items-center space-x-3">
+              <div
+                key={gig.id}
+                className="p-4 border rounded-lg shadow-sm bg-white flex flex-col space-y-2"
+              >
+                <div className="flex items-center space-x-3">
                   <img
                     src={gig.image}
                     alt="Gig"
-                    className="w-16 h-12 rounded-md object-cover"
+                    className="w-16 h-10 rounded-md object-cover"
                   />
-                  <span className="text-sm text-gray-700">{gig.title}</span>
-                </td>
-                <td className="px-4 py-3 text-sm text-center">{gig.impressions}</td>
-                <td className="px-4 py-3 text-sm text-center">{gig.clicks}</td>
-                <td className="px-4 py-3 text-sm text-center">{gig.orders}</td>
-                <td className="px-4 py-3 text-sm text-center">{gig.cancellations}</td>
-                <td className="px-4 py-3 text-center">
-                  <button className="p-1 rounded hover:bg-gray-200">
-                    <HiChevronDown className="w-5 h-5 text-gray-600" />
-                  </button>
-                </td>
-              </tr>
+                  <span className="text-sm font-medium">{gig.title}</span>
+                </div>
+                <div className="grid grid-cols-1 gap-2 text-xs text-gray-600">
+                  <span>Reason: {gig.reason}</span>
+                  <span>Date: {gig.date}</span>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </div>
+        </>
+      )}
 
       {/* Info link */}
       <div className="mt-3 text-right">

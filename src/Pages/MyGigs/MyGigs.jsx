@@ -58,7 +58,7 @@ const Gigs = () => {
     <div className="p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-800">My Gigs</h1>
+        <h1 className="text-2xl font-bold text-gray-900">My Gigs</h1>
         <button
           onClick={() => navigate("/gigs/create-gigs")}
           className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg shadow hover:bg-gray-50 transition"
@@ -116,9 +116,9 @@ const Gigs = () => {
       </div>
 
       {/* Conditional render */}
-      {activeTab === "active" && <ActiveGigsTable gigsData={gigsData} />}
-      {activeTab === "pending" && <PendingApprovalTable />}
-      {activeTab === "denied" && <DeniedGigsTable />}
+      {activeTab === "active" && <ActiveGigsTable gigsData={gigsData} tableType="Active Gigs" />}
+      {activeTab === "pending" && <ActiveGigsTable gigsData={gigsData} tableType="Pending"/>}
+      {activeTab === "denied" && <ActiveGigsTable gigsData={gigsData} tableType="Denied"/>}
     </div>
   );
 };

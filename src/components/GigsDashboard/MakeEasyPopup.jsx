@@ -64,7 +64,7 @@ export default function MakeEasyPopup({ onClose, uploadedImage }) {
           ) : (
             <>
               <FaRegImage className="text-3xl text-gray-400 mb-2" />
-              <p className="text-sm text-gray-500">Drag & Drop A Photo Or</p>
+              <p className="text-sm text-gray-500">Upload A Image Or</p>
               <span className="text-indigo-600 text-sm font-medium cursor-pointer">
                 Browse
               </span>

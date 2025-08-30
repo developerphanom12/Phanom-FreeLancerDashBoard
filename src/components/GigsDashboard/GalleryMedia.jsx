@@ -123,7 +123,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData, formikProps  }) => {
               ) : (
                 <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-md h-40 text-gray-500 text-sm cursor-pointer hover:border-purple-400 transition">
                   <FaRegImage size={32} className="mb-2 text-gray-400" />
-                  <p>Drag & Drop A Photo Or</p>
+                  <p>Upload Image</p>
                   <span className="text-blue-500 font-medium hover:underline">
                     Browse
                   </span>
@@ -181,7 +181,7 @@ const GalleryMedia = ({ onCancel, onContinue, initialData, formikProps  }) => {
         ) : (
           <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-md h-40 text-gray-500 text-sm cursor-pointer hover:border-purple-400 transition">
             <FaRegPlayCircle size={36} className="mb-2 text-gray-400" />
-            <p>Drag & Drop A Video Or</p>
+            <p>Upload A Video Or</p>
             <span className="text-blue-500 font-medium hover:underline">
               Browse
             </span>
@@ -232,8 +232,8 @@ const GalleryMedia = ({ onCancel, onContinue, initialData, formikProps  }) => {
 
       {/* Popup */}
       {openPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="fixed inset-0 flex items-center backdrop-blur-sm justify-center z-50">
+          <div className="absolute inset-0  opacity-50"></div>
           <div className="relative z-10">
             <MakeEasyPopup
               onClose={() => setOpenPopup(false)}

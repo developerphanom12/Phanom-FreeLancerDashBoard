@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import OrderCard from "../../components/OrdersComponents/OrderCard";
+import WorkReviewPopup from "../../components/OrdersComponents/WorkReviewPopup";
+import RateClientPopup from "../../components/OrdersComponents/RateClientPopup";
 
 const activeOrders = [
   {
@@ -75,6 +77,9 @@ const deniedOrders = [
 
 const Orders = () => {
   const [activeTab, setActiveTab] = useState("active");
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const getData = () => {
     switch (activeTab) {
@@ -89,15 +94,25 @@ const Orders = () => {
     }
   };
 
+  const handleOpenReview = (order) => {
+    setSelectedOrder(order);
+    setShowReviewModal(true);
+  };
+
+  const handleOpenSubmit = (order) => {
+    setSelectedOrder(order);
+    setShowSubmitModal(true);
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-6 ">
            {/* Header */}
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900  mb-6">Orders</h1>
+        <h1 className="text-2xl font-bold text-gray-900  mb-6">Orders</h1>
     
       {/* Tabs */}
       <div className="flex justify-between">
 
-      <div className="flex gap-6 pb-2 mb-6 text-gray-600 text-lg font-medium">
+      <div className="flex gap-6 pb-2 mb-6 text-gray-600  font-medium">
         <button
           onClick={() => setActiveTab("active")}
           className={`pb-2 ${
@@ -146,9 +161,20 @@ const Orders = () => {
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {getData().map((order) => (
-          <OrderCard key={order.id} {...order} />
+          <OrderCard
+            key={order.id}
+            {...order}
+            onReview={() => handleOpenReview(order)}
+            onSubmit={() => handleOpenSubmit(order)}
+          />
         ))}
       </div>
+      {showReviewModal && (
+        <RateClientPopup onClose={() => setShowReviewModal(false)} />
+      )}
+      {showSubmitModal && (
+        <WorkReviewPopup onClose={() => setShowSubmitModal(false)} />
+      )}
     </div>
   );
 };

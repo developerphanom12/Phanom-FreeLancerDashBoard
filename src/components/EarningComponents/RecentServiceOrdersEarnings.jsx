@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RecentServiceOrdersEarnings = () => {
+  const navigate = useNavigate()
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <div className="mb-4">
@@ -13,7 +15,7 @@ const RecentServiceOrdersEarnings = () => {
           <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:opacity-90 text-sm">
             Get Paid Now
           </button>
-          <button className="px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 text-sm">
+          <button onClick={() => navigate('/payment-settings')} className="px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 text-sm">
             View Payment Settings
           </button>
         </div>

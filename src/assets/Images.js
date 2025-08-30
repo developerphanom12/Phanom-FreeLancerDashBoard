@@ -7,6 +7,7 @@ import Send from "./media/Send.png"
 import Message from "./media/message.png"
 import Congratulations from "./media/Congratulations.png";
 import ThankYouClient from "./media/ThankYouClient.png";
+import Congratulations2 from "./media/Congratulations2.png";
 
 const Images = {
     PhanomLogo,
@@ -18,6 +19,7 @@ const Images = {
     Message,
     Congratulations,
     ThankYouClient,
+    Congratulations2,
 };
 
 export default Images;

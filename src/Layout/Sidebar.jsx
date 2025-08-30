@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         { name: 'My Gigs', icon: MdOutlineGroupWork, path: '/gigs' },
         { name: 'Orders', icon: HiDocumentText, path: '/orders' },
         { name: 'Earnings', icon: CiWallet, path: '/earnings' },
-        { name: 'Payment Settings', icon: CiCreditCard1, path: '/favorites' },
+        { name: 'Payment Settings', icon: CiCreditCard1, path: '/payment-settings' },
         { name: 'Support', icon: HiSupport, path: '/support' }
       ]
     }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCalendarAlt, FaClipboardList, FaClock, FaFilePdf, FaFileWord } from "react-icons/fa";
+import { FaCalendarAlt, FaClipboardList, FaClock, FaFilePdf, FaFileWord, FaRegClock } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { CiCalendar, CiClock2 } from "react-icons/ci";
@@ -259,8 +259,8 @@ const OrderDetails = () => {
                     {/* Timer */}
                     <div className=" flex justify-between text-sm sm:text-lg">
                         <h3 className=" mb-2">Timing Ends</h3>
-                        <p className="text-[#EB4F4F] font-extralight flex items-start gap-2">
-                            <CiClock2 className="mt-0.5" /> 40h : 28m : 43s
+                        <p className="text-[#EB4F4F] font-medium flex items-start gap-2">
+                            <FaRegClock className="mt-1.5 " /> 40h : 28m : 43s
                         </p>
                     </div>
 
@@ -287,9 +287,7 @@ const OrderDetails = () => {
                                         )}
                                     </div>
                                     <p className="underline">{log.user}</p>
-                                    <p className={`text-sm text-gray-600`}>
-                                        {log.title}
-                                    </p>
+                                   
                                     {/* <p className={`text-sm ${statusColors[log.status]}`}>
                                         {log.title} 
                                     </p> */}
@@ -297,12 +295,18 @@ const OrderDetails = () => {
 
                                 {/* Expanded Details */}
                                 {openLog === log.id && (
+                                    <div>
+
+                                     <p className={`text-sm text-gray-600`}>
+                                        {log.title}
+                                    </p>
                                     <div className=" text-sm text-gray-600 py-2 ">
                                         {log.description}
                                     </div>
+                                    </div>
                                 )}
                                 <p className={`text-sm ${statusColors[log.status] || "text-green-600"}`}>
-                                    {log.title}
+                                    {log.status}
                                 </p>
                             </div>
                         ))}

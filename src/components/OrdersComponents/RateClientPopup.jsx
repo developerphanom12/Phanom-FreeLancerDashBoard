@@ -15,7 +15,7 @@ const RateClientPopup = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
+      <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg border border-gray-300">
         {/* ---------- STEP 1: Rate & Review ---------- */}
         {!submitted ? (
           <>

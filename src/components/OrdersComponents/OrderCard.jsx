@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaStar, FaRegCalendarAlt, FaMapMarkerAlt, FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import WorkReviewPopup from "./WorkReviewPopup";
-import RateClientPopup from "./RateClientPopup";
 
 const OrderCard = ({
     status,
@@ -13,10 +11,9 @@ const OrderCard = ({
     location,
     description,
     tags,
+    onReview,
+    onSubmit,
 }) => {
-    const [showReviewModal, setShowReviewModal] = useState(false);
-    const [showSubmitModal, setShowSubmitModal] = useState(false);
-
     const getStatusClasses = () => {
         switch (status.toLowerCase()) {
             case 'completed':
@@ -118,9 +115,9 @@ const OrderCard = ({
     onClick={(e) => {
       e.stopPropagation();
       if (status === "completed") {
-        setShowReviewModal(true);
+        onReview && onReview();
       } else {
-        setShowSubmitModal(true);
+        onSubmit && onSubmit();
       }
     }}
     className="w-full py-2 text-white rounded-lg bg-gradient-to-r from-[#459CE1] to-[#D11AE7]"
@@ -131,13 +128,6 @@ const OrderCard = ({
 
 
         </div>
-             { showReviewModal && (
-             <RateClientPopup onClose={() => setShowReviewModal(false)}/>
-              )}
-
-              { showSubmitModal && (
-             <WorkReviewPopup onClose={() => setShowSubmitModal(false)}/>
-              )}
         
         </>
     );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HiChevronDown } from "react-icons/hi";
 
-const ActiveGigsTable = ({ gigsData }) => {
+const ActiveGigsTable = ({ gigsData , tableType }) => {
   const [selectedIds, setSelectedIds] = useState([]);
 
   const toggleCheckbox = (id) => {
@@ -25,11 +25,11 @@ const ActiveGigsTable = ({ gigsData }) => {
   return (
     <>
       <div className="bg-white rounded-xl shadow-sm p-4">
-        <h2 className="text-lg font-semibold mb-4">Active Gigs</h2>
+        <h2 className="text-lg font-semibold mb-4">{tableType}</h2>
 
         {gigsData.length === 0 ? (
           <div className="text-center text-gray-500 py-6">
-            No active gigs available.  
+            No {tableType} available.  
             <br />
             <span className="text-sm">Click "Create a New Gig" to get started.</span>
           </div>

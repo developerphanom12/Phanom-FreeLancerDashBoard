@@ -77,7 +77,7 @@ const ProfileMain = () => {
                 <h3 className='text-2xl font-semibold mb-4'>Skills</h3>
                 <div className='flex flex-wrap gap-3'>
                     {["Wireframing", "Prototyping", "UX Design", "Responsive", "Components", "UI/UX", "Routing", "APIs", "State", "+14"].map((skill, index) => (
-                        <span key={index} className='px-4 py-1 border border-gray-300 shadow-lg rounded-full text-sm hover:bg-gray-100 cursor-default'>
+                        <span key={index} className='px-6 py-2 border bg-[#F5F7F9] border-gray-300 drop-shadow-sm rounded-full text-sm hover:bg-gray-100 cursor-default'>
                             {skill}
                         </span>
                     ))}

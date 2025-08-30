@@ -53,12 +53,12 @@ const Dashboard = () => {
       </div>
 
       {/* Milestone Table */}
-      <div className='overflow-x-auto min-w-[700px]'>
+      <div className="overflow-x-auto w-full">
         <MilestoneTable />
       </div>
 
       {/* Recent Service Orders */}
-      <div className='overflow-x-auto min-w-[700px]'>
+      <div className="overflow-x-auto w-full">
         <RecentServiceOrders />
       </div>
     </div>
