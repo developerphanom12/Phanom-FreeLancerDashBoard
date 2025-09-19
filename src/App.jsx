@@ -15,10 +15,13 @@ import Earnings from './Pages/Earnings/Earnings'
 import Orders from "./Pages/Orders/Orders"
 import OrderDetails from './Pages/Orders/OrderDetails'
 import SellYourWork from './Pages/Portfolio/SellYourWork'
+import MilestoneForm from './Pages/Milestone/Milestone'
+import ScrollToTop from './GlobalComponents/ScrollToTop'
 
 const App = () => {
   return (
      <Router>
+        <ScrollToTop/>
       <Routes>
         {/* Routes with layout */}
         <Route element={<Layout />}>
@@ -29,6 +32,7 @@ const App = () => {
           <Route path="/portfolio/upload-your-work" element={<UploadYourWork/>} />
           <Route path="/portfolio/upload-your-work/sell-your-work" element={<SellYourWork/>} />
           <Route path="/messages" element={<Message />} />
+          <Route path='/messages/milestone' element={<MilestoneForm/>}/>
           <Route path="/support" element={<Supports />} />
           <Route path="/payment-settings" element={<PaymentSettings />} />
           <Route path="/gigs" element={<Gigs />} />

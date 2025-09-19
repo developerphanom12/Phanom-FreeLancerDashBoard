@@ -4,9 +4,11 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaRegSmile, FaStar } from 'react-icons/fa';
 import Images from '../../assets/Images';
 import { CiFaceSmile } from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
 
 const ChatArea = ({ selectedChat, showProfile, setShowProfile, setShowSidebar }) => {
   const [message, setMessage] = useState('');
+  const navigate = useNavigate()
 
   const messages = [
     {
@@ -40,10 +42,7 @@ const ChatArea = ({ selectedChat, showProfile, setShowProfile, setShowSidebar })
   ];
 
   const handleSendMessage = () => {
-    if (message.trim()) {
-      // Handle sending message
-      setMessage('');
-    }
+    navigate("milestone")
   };
 
   if (!selectedChat) {
